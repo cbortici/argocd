@@ -13,7 +13,7 @@ spec:
     targetRevision: HEAD
     path: defaultapp
   destination:
-    server: https://6BFC6989C948DBF0B4DF94BE817D18FD.gr7.eu-central-1.eks.amazonaws.com
+    server: "https://6BFC6989C948DBF0B4DF94BE817D18FD.gr7.eu-central-1.eks.amazonaws.com"
   syncPolicy:
     automated:
       prune: true
