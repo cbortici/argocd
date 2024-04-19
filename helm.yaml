@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://cbortici.github.io/argocd/charts/
-    targetRevision: 0.1.0
+    targetRevision: 0.1.1
     chart: hello-world
     helm:
       version: v3
