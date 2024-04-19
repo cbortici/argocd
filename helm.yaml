@@ -53,4 +53,7 @@ spec:
     path: helm
     repoURL: https://github.com/cbortici/argocd.git
     targetRevision: HEAD
+    helm:
+      values: |-
+        replicaCount: 1
 
