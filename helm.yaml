@@ -1,31 +1,56 @@
----
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: hello-world
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://cbortici.github.io/argocd/charts/
+#     targetRevision: 0.1.1
+#     chart: hello-world
+#     helm:
+#       version: v3
+#       releaseName: hello-world
+#       passCredentials: false
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: hello-world
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#       allowEmpty: false
+#     syncOptions:
+#       - Validate=true
+#       - CreateNamespace=true
+#       - PrunePropagationPolicy=foreground
+#       - PruneLast=true
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: hello-world
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
-  source:
-    repoURL: https://cbortici.github.io/argocd/charts/
-    targetRevision: 0.1.1
-    chart: hello-world
-    helm:
-      version: v3
-      releaseName: hello-world
-      passCredentials: false
   destination:
-    server: https://kubernetes.default.svc
     namespace: hello-world
+    server: 'https://kubernetes.default.svc'
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: false
     syncOptions:
-      - Validate=true
-      - CreateNamespace=true
-      - PrunePropagationPolicy=foreground
-      - PruneLast=true
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+    - PruneLast=true
+  source:
+    path: helm
+    repoURL: https://github.com/cbortici/argocd.git
+    targetRevision: HEAD
+
