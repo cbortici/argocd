@@ -1,34 +1,34 @@
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: hello-world
-#   namespace: argocd
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://cbortici.github.io/argocd/charts/
-#     targetRevision: 0.1.1
-#     chart: hello-world
-#     helm:
-#       version: v3
-#       releaseName: hello-world
-#       passCredentials: false
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: hello-world
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#       allowEmpty: false
-#     syncOptions:
-#       - Validate=true
-#       - CreateNamespace=true
-#       - PrunePropagationPolicy=foreground
-#       - PruneLast=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://cbortici.github.io/argocd/charts/
+    targetRevision: 0.1.1
+    chart: hello-world
+    helm:
+      version: v3
+      releaseName: hello-world
+      passCredentials: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -55,5 +55,53 @@ spec:
     targetRevision: HEAD
     helm:
       values: |-
+
         replicaCount: 1
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: gitea
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: 'gitea'
+#     server: 'https://kubernetes.default.svc'
+#   project: apps
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=true
+#     - ApplyOutOfSyncOnly=true
+#     - PruneLast=true
+#   source:
+#     path: gitea
+#     repoURL: https://github.com/test/helm-charts.git
+#     targetRevision: HEAD
+#     helm:
+#       values: |-
+# # Here you can pass all values to overwrite default chart values
+#         ingress:
+#           enabled: true
+#           annotations:
+#             kubernetes.io/ingress.class: nginx
+#           hosts:
+#             - host: gitea.test.com
+#               paths:
+#                 - path: /
+#                   pathType: Prefix
+#           tls:
+#           - hosts:
+#             - gitea.test.com
+#             secretName: tls-wildcard-test-com
+#         resources:
+#           limits:
+#             cpu: 600m
+#             memory: 600Mi
+#           requests:
+#             cpu: 500m
+#             memory: 500Mi
 
