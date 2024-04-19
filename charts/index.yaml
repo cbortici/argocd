@@ -1,14 +1,14 @@
 apiVersion: v1
 entries:
-  test-chart:
+  hello-world:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-04-19T09:21:47.11085154+03:00"
+    created: "2024-04-19T09:59:24.148307738+03:00"
     description: A Helm chart for Kubernetes
-    digest: 3306d7987207dd132076d2e08d12cf22af761b4c6ccba41c538b4608e2cef401
-    name: test-chart
+    digest: e4186b8245faee2a622af8efe2dcc576247c3f44f94c5e54eaa2fdbcee79f03f
+    name: hello-world
     type: application
     urls:
-    - test-chart-0.1.0.tgz
+    - hello-world-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-19T09:21:47.110335294+03:00"
+generated: "2024-04-19T09:59:24.147809758+03:00"
