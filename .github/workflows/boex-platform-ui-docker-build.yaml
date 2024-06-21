@@ -15,7 +15,7 @@ jobs:
                 whoami
                 docker version
           - name: Deploy
-            uses: "./.github/templates/docker-template.yaml" #Just need to pass the path from action
+            uses: "./.github/templates" #Just need to pass the path from action
                # Defining the variables required in our action
             with:
               version: v1.0.0
