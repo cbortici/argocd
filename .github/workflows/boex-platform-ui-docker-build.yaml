@@ -1,17 +1,7 @@
-name: Call a reusable workflow
-
-on:
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  call-workflow-passing-data:
-    permissions:
-      contents: read
-      pull-requests: write
-    uses: ./.github/workflows/templates/ci-template.yaml
+  my-job:
+    # Importing a reusable workflow from another repository and branch
+    uses: ./.github/workflows/reusable-workflow.yaml
+    # Passing 'node-version' as an input parameter to the reusable workflow
     with:
-      config-path: "helloworld"
-    secrets:
-      token: "helloworld"
+      node-version: '18.0'
