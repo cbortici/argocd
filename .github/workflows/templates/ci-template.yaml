@@ -1,8 +1,18 @@
-# File: .github/workflows/templates/ci-template.yaml
+name: deploy
 
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
-  - name: install
-    run: |
-        echo "helloworld"
+# Were we can define the inputs that our action will accept
+inputs:
+  version: 
+    required: true
+  namespace:
+    required: true
+
+runs:
+  using: "composite"
+  # Defining the action steps(Just one step to be simple)
+  steps:
+  - name: deploy stack
+    uses: somelibrary/deploy@master
+    with:
+      version: ${{ inputs.version }}
+      namespace: ${{ inputs.namespace}}
