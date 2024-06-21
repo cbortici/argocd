@@ -1,18 +1,20 @@
-name: deploy
+name: Reusable workflow example
 
-# Were we can define the inputs that our action will accept
-inputs:
-  version: 
-    required: true
-  namespace:
-    required: true
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
-runs:
-  using: "composite"
-  # Defining the action steps(Just one step to be simple)
-  steps:
-  - name: deploy stack
-    uses: somelibrary/deploy@master
-    with:
-      version: ${{ inputs.version }}
-      namespace: ${{ inputs.namespace}}
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v4
+      with:
+        repo-token: ${{ secrets.token }}
+        configuration-path: ${{ inputs.config-path }}
