@@ -1,0 +1,29 @@
+name: boex platform ui docker build
+
+on:
+    workflow_dispatch:
+
+jobs:
+    charts-deployment:
+        name: installer
+        runs-on: self-hosted
+        steps:
+          - uses: actions/checkout@v4
+          - name: install
+            run: |
+                echo "helloworld"
+                whoami
+                docker version
+          - name: Deploy
+            uses: "./.github/templates/docker-template.yaml" #Just need to pass the path from action
+               # Defining the variables required in our action
+            with:
+              version: v1.0.0
+              namespace: "stage"
+          # - name: Build and push
+          #   uses: docker/build-push-action@v3
+          #   with:
+          #     context: .
+          #     push: false
+          #     tags: docker.tools.app.boex.biz/boex-platform-ui
+            
