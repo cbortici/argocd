@@ -1,20 +1,21 @@
-name: Test
+name: deploy
 
 on:
   push:
-    branches:
-      - '*'
-
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      
 jobs:
-  tests:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+    # We need this because GitHub needs to clone the branch to pipeline
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Set up Go
-        uses: actions/setup-go@v2
+      - name: Deploy
+        uses: "./.github/workflows/templates" #Just need to pass the path from action
+       # Defining the variables required in our action
         with:
-          go-version: 1.15
-          
-      - name: Test
-        run: make test
+          version: v1.0.0
+          namespace: "stage"
